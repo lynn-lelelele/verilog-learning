@@ -32,7 +32,9 @@ verilog-lab/
     └── modules/         ← 模块层次
         ├── half_adder.v
         ├── full_adder.v
-        └── full_adder_tb.v
+        ├── full_adder_tb.v
+        ├── adder4.v
+        └── adder4_tb.v
 ```
 
 ## 笔记索引

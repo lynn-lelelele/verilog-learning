@@ -1,7 +1,7 @@
 // ============================================================
 // 文件名   ：full_adder_tb.v
 // 内容     ：全加器测试台，穷举 a、b、cin 的 8 种组合
-// 对应笔记 ：notes/08-模块层次与加法器.md
+// 对应笔记 ：notes/10-全加器.md
 // 运行     ：iverilog -o fa.vvp half_adder.v full_adder.v full_adder_tb.v
 //            vvp fa.vvp
 // 预期输出 ：

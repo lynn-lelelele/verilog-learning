@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330">
+  <rect width="720" height="330" fill="#ffffff"/>
+
+  <!-- 左：黑盒 -->
+  <text x="30" y="38" font-size="15" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">对外看：一个黑盒</text>
+
+  <g font-size="14" fill="#374151" font-family="Consolas, Menlo, monospace">
+    <text x="22" y="104">a</text>
+    <text x="22" y="144">b</text>
+    <text x="22" y="184">c</text>
+  </g>
+
+  <rect x="110" y="68" width="130" height="140" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="175" y="128" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">and3_top</text>
+  <text x="175" y="152" font-size="12" fill="#6b7280" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, sans-serif">y = a · b · c</text>
+
+  <g stroke="#6b7280" stroke-width="2" fill="none">
+    <path d="M 40 100 L 110 100 L 110 110"/>
+    <path d="M 40 140 L 110 140"/>
+    <path d="M 40 180 L 110 180 L 110 170"/>
+    <path d="M 240 140 L 300 140"/>
+  </g>
+  <text x="308" y="145" font-size="14" fill="#14532d" font-family="Consolas, Menlo, monospace">y</text>
+
+  <!-- 分隔线 -->
+  <line x1="370" y1="30" x2="370" y2="300" stroke="#d1d5db" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- 右：内部 -->
+  <text x="390" y="38" font-size="15" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">内部：两个 and2 实例</text>
+
+  <g font-size="13" fill="#374151" font-family="Consolas, Menlo, monospace">
+    <text x="382" y="84">a</text>
+    <text x="382" y="119">b</text>
+    <text x="382" y="229">c</text>
+  </g>
+
+  <rect x="460" y="62" width="85" height="80" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="502" y="98" font-size="17" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">&amp;</text>
+  <text x="502" y="120" font-size="11" fill="#6b7280" text-anchor="middle" font-family="Consolas, Menlo, monospace">g1</text>
+
+  <rect x="590" y="172" width="85" height="80" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="632" y="208" font-size="17" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">&amp;</text>
+  <text x="632" y="230" font-size="11" fill="#6b7280" text-anchor="middle" font-family="Consolas, Menlo, monospace">g2</text>
+
+  <g stroke="#6b7280" stroke-width="2" fill="none">
+    <path d="M 400 80 L 460 80"/>
+    <path d="M 400 115 L 460 115"/>
+    <path d="M 545 102 L 565 102 L 565 192 L 590 192"/>
+    <path d="M 400 225 L 590 225"/>
+    <path d="M 675 212 L 706 212"/>
+  </g>
+  <text x="556" y="94" font-size="12" fill="#6b7280" font-family="Consolas, Menlo, monospace">n1</text>
+  <text x="690" y="205" font-size="13" fill="#14532d" font-family="Consolas, Menlo, monospace">y</text>
+
+  <text x="30" y="278" font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">n1 是模块内部的线，外面看不到；g1、g2 是两块真实的、同时存在的电路，不是“调用两次函数”。</text>
+  <text x="30" y="304" font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">顶层模块的 a、b、c、y 才是对外引脚，内部信号一律用 wire 声明。</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360">
+  <rect width="720" height="360" fill="#ffffff"/>
+  <text x="20" y="28" font-size="16" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">cout = a·b + cin·(a^b) 的逻辑图</text>
+
+  <!-- 输入 -->
+  <g font-size="15" fill="#374151" font-family="Consolas, Menlo, monospace">
+    <text x="20" y="86">a</text>
+    <text x="20" y="126">b</text>
+    <text x="6" y="286">cin</text>
+  </g>
+
+  <!-- 第一层门 -->
+  <g fill="#eff6ff" stroke="#2563eb" stroke-width="2">
+    <rect x="140" y="55" width="80" height="60" rx="5"/>
+    <rect x="140" y="190" width="80" height="70" rx="5"/>
+  </g>
+  <g font-size="18" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">
+    <text x="180" y="93">&amp;</text>
+    <text x="180" y="232">=1</text>
+  </g>
+
+  <!-- 第二层门 -->
+  <rect x="300" y="195" width="80" height="70" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="340" y="237" font-size="18" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">&amp;</text>
+
+  <!-- 输出门 -->
+  <rect x="460" y="90" width="80" height="70" rx="5" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="500" y="132" font-size="18" fill="#14532d" text-anchor="middle" font-family="Consolas, Menlo, monospace">≥1</text>
+
+  <!-- 连线 -->
+  <g stroke="#6b7280" stroke-width="2" fill="none">
+    <path d="M 40 80 L 140 80"/>
+    <path d="M 90 80 L 90 215 L 140 215"/>
+    <path d="M 40 120 L 140 120"/>
+    <path d="M 120 120 L 120 245 L 140 245"/>
+    <path d="M 220 85 L 430 85 L 430 110 L 460 110"/>
+    <path d="M 220 225 L 300 225"/>
+    <path d="M 40 280 L 280 280 L 280 250 L 300 250"/>
+    <path d="M 380 230 L 410 230 L 410 140 L 460 140"/>
+    <path d="M 540 125 L 620 125"/>
+  </g>
+
+  <!-- 中间节点 -->
+  <g font-size="12" fill="#6b7280" font-family="Consolas, Menlo, monospace">
+    <text x="238" y="78">n1 = a·b</text>
+    <text x="238" y="219">n2 = a^b</text>
+    <text x="392" y="212">n3 = cin·n2</text>
+  </g>
+
+  <!-- 输出 -->
+  <text x="628" y="130" font-size="15" fill="#14532d" font-family="Consolas, Menlo, monospace">cout</text>
+
+  <!-- 分层标注 -->
+  <g font-size="12" fill="#9ca3af" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="150" y="46">第 1 层</text>
+    <text x="310" y="188">第 2 层</text>
+    <text x="468" y="82">最后合并</text>
+  </g>
+
+  <!-- 说明 -->
+  <g font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="20" y="322">画法：按运算顺序由内向外。括号里的 a^b 先画（n2），再与 cin 相与（n3），</text>
+    <text x="20" y="344">同时另一路算 a·b（n1），最后用或门把 n1、n3 合并成 cout。</text>
+  </g>
+</svg>

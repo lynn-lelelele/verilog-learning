@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320">
+  <rect width="720" height="320" fill="#ffffff"/>
+  <text x="20" y="30" font-size="15" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">同一个模块复制 4 份：4 位按位与</text>
+
+  <g font-size="13" fill="#374151" font-family="Consolas, Menlo, monospace">
+    <text x="20" y="78">a[3] b[3]</text>
+    <text x="20" y="133">a[2] b[2]</text>
+    <text x="20" y="188">a[1] b[1]</text>
+    <text x="20" y="243">a[0] b[0]</text>
+  </g>
+
+  <g fill="#eff6ff" stroke="#2563eb" stroke-width="2">
+    <rect x="200" y="55" width="120" height="40" rx="5"/>
+    <rect x="200" y="110" width="120" height="40" rx="5"/>
+    <rect x="200" y="165" width="120" height="40" rx="5"/>
+    <rect x="200" y="220" width="120" height="40" rx="5"/>
+  </g>
+  <g font-size="12" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">
+    <text x="260" y="80">and2 u3</text>
+    <text x="260" y="135">and2 u2</text>
+    <text x="260" y="190">and2 u1</text>
+    <text x="260" y="245">and2 u0</text>
+  </g>
+
+  <g stroke="#6b7280" stroke-width="2" fill="none">
+    <path d="M 130 75 L 200 75"/>
+    <path d="M 130 130 L 200 130"/>
+    <path d="M 130 185 L 200 185"/>
+    <path d="M 130 240 L 200 240"/>
+    <path d="M 320 75 L 400 75"/>
+    <path d="M 320 130 L 400 130"/>
+    <path d="M 320 185 L 400 185"/>
+    <path d="M 320 240 L 400 240"/>
+  </g>
+
+  <g font-size="13" fill="#14532d" font-family="Consolas, Menlo, monospace">
+    <text x="408" y="80">y[3]</text>
+    <text x="408" y="135">y[2]</text>
+    <text x="408" y="190">y[1]</text>
+    <text x="408" y="245">y[0]</text>
+  </g>
+
+  <text x="20" y="290" font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">每个实例吃一位，4 个实例同时工作；模块只写一次，实例名 u3~u0 各不相同。</text>
+</svg>

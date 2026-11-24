@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360">
+  <rect width="760" height="360" fill="#ffffff"/>
+  <text x="24" y="30" font-size="17" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">全加器 = 两个半加器 + 一个或门</text>
+
+  <!-- 输入标签 -->
+  <g font-size="15" fill="#374151" font-family="Consolas, Menlo, monospace">
+    <text x="18" y="75">a</text>
+    <text x="18" y="115">b</text>
+    <text x="6" y="265">cin</text>
+  </g>
+
+  <!-- 半加器 ha1 -->
+  <rect x="140" y="40" width="120" height="100" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="200" y="88" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, sans-serif">半加器</text>
+  <text x="200" y="110" font-size="13" fill="#6b7280" text-anchor="middle" font-family="Consolas, Menlo, monospace">ha1</text>
+
+  <!-- 半加器 ha2 -->
+  <rect x="340" y="180" width="120" height="100" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="400" y="228" font-size="14" fill="#1e3a8a" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, sans-serif">半加器</text>
+  <text x="400" y="250" font-size="13" fill="#6b7280" text-anchor="middle" font-family="Consolas, Menlo, monospace">ha2</text>
+
+  <!-- 或门 -->
+  <rect x="540" y="60" width="110" height="90" rx="6" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="595" y="100" font-size="14" fill="#14532d" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, sans-serif">或门</text>
+  <text x="595" y="122" font-size="13" fill="#6b7280" text-anchor="middle" font-family="Consolas, Menlo, monospace">cout = c1 | c2</text>
+
+  <!-- 连线 -->
+  <g stroke="#6b7280" stroke-width="2" fill="none">
+    <path d="M 40 70 L 140 70"/>
+    <path d="M 40 110 L 140 110"/>
+    <path d="M 260 80 L 300 80 L 300 230 L 340 230"/>
+    <path d="M 260 110 L 500 110 L 500 90 L 540 90"/>
+    <path d="M 40 260 L 340 260"/>
+    <path d="M 460 215 L 640 215"/>
+    <path d="M 460 270 L 520 270 L 520 120 L 540 120"/>
+    <path d="M 650 105 L 700 105"/>
+  </g>
+
+  <!-- 中间信号名 -->
+  <g font-size="12" fill="#6b7280" font-family="Consolas, Menlo, monospace">
+    <text x="272" y="74">s1</text>
+    <text x="272" y="104">c1</text>
+    <text x="500" y="262">c2</text>
+  </g>
+
+  <!-- 输出标签 -->
+  <g font-size="15" fill="#1e3a8a" font-family="Consolas, Menlo, monospace">
+    <text x="648" y="209">sum</text>
+    <text x="706" y="109">cout</text>
+  </g>
+
+  <!-- 说明 -->
+  <g font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="24" y="318">ha1 先算 a + b，得到中间和 s1、中间进位 c1；</text>
+    <text x="24" y="340">ha2 再把 s1 与 cin 相加，得到最终 sum 与 c2；两个进位用或门合并成 cout。</text>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="290" viewBox="0 0 720 290">
+  <rect width="720" height="290" fill="#ffffff"/>
+  <text x="24" y="34" font-size="18" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">符号扩展：{4{a[3]}, a}，把 4 位扩成 8 位</text>
+
+  <text x="60" y="66" font-size="14" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">输入 a（4 位）</text>
+  <g font-family="Consolas, Menlo, monospace" text-anchor="middle">
+    <rect x="90"  y="80" width="55" height="50" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+    <rect x="145" y="80" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="200" y="80" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="255" y="80" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="117" y="112" font-size="22" fill="#7c2d12">1</text>
+    <text x="172" y="112" font-size="22" fill="#1e3a8a">0</text>
+    <text x="227" y="112" font-size="22" fill="#1e3a8a">1</text>
+    <text x="282" y="112" font-size="22" fill="#1e3a8a">1</text>
+    <g font-size="13" fill="#6b7280">
+      <text x="117" y="150">a[3]</text>
+      <text x="172" y="150">a[2]</text>
+      <text x="227" y="150">a[1]</text>
+      <text x="282" y="150">a[0]</text>
+    </g>
+
+    <text x="60" y="200" font-size="14" fill="#6b7280">输出 y（8 位）</text>
+    <rect x="90"  y="215" width="55" height="50" fill="#fed7aa" stroke="#ea580c"/>
+    <rect x="145" y="215" width="55" height="50" fill="#fed7aa" stroke="#ea580c"/>
+    <rect x="200" y="215" width="55" height="50" fill="#fed7aa" stroke="#ea580c"/>
+    <rect x="255" y="215" width="55" height="50" fill="#fed7aa" stroke="#ea580c"/>
+    <rect x="310" y="215" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="365" y="215" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="420" y="215" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="475" y="215" width="55" height="50" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="117" y="247" font-size="22" fill="#7c2d12">1</text>
+    <text x="172" y="247" font-size="22" fill="#7c2d12">1</text>
+    <text x="227" y="247" font-size="22" fill="#7c2d12">1</text>
+    <text x="282" y="247" font-size="22" fill="#7c2d12">1</text>
+    <text x="337" y="247" font-size="22" fill="#1e3a8a">1</text>
+    <text x="392" y="247" font-size="22" fill="#1e3a8a">0</text>
+    <text x="447" y="247" font-size="22" fill="#1e3a8a">1</text>
+    <text x="502" y="247" font-size="22" fill="#1e3a8a">1</text>
+    <g font-size="13" fill="#6b7280">
+      <text x="117" y="285">y[7]</text>
+      <text x="172" y="285">y[6]</text>
+      <text x="227" y="285">y[5]</text>
+      <text x="282" y="285">y[4]</text>
+      <text x="337" y="285">y[3]</text>
+      <text x="392" y="285">y[2]</text>
+      <text x="447" y="285">y[1]</text>
+      <text x="502" y="285">y[0]</text>
+    </g>
+  </g>
+
+  <g stroke="#ea580c" stroke-width="1.5" fill="none" stroke-dasharray="4 3">
+    <line x1="117" y1="155" x2="117" y2="213"/>
+    <line x1="117" y1="155" x2="172" y2="213"/>
+    <line x1="117" y1="155" x2="227" y2="213"/>
+    <line x1="117" y1="155" x2="282" y2="213"/>
+  </g>
+</svg>

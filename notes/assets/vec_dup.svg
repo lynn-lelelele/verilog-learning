@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="230" viewBox="0 0 720 230">
+  <rect width="720" height="230" fill="#ffffff"/>
+  <text x="24" y="34" font-size="18" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">复制：{4{a}} 把 1 位铺成 4 位</text>
+
+  <rect x="60" y="70" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="90" y="108" font-size="24" fill="#1e3a8a" text-anchor="middle" font-family="Consolas, Menlo, monospace">a</text>
+  <text x="90" y="152" font-size="13" fill="#6b7280" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei, sans-serif">1 位</text>
+
+  <path d="M 126 100 L 206 100" stroke="#6b7280" stroke-width="2" fill="none"/>
+  <path d="M 206 100 L 196 95 L 196 105 z" fill="#6b7280"/>
+
+  <g font-family="Consolas, Menlo, monospace" text-anchor="middle">
+    <rect x="220" y="70" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="290" y="70" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="360" y="70" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="430" y="70" width="60" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="250" y="108" font-size="24" fill="#1e3a8a">a</text>
+    <text x="320" y="108" font-size="24" fill="#1e3a8a">a</text>
+    <text x="390" y="108" font-size="24" fill="#1e3a8a">a</text>
+    <text x="460" y="108" font-size="24" fill="#1e3a8a">a</text>
+    <g font-size="13" fill="#6b7280">
+      <text x="250" y="152">y[3]</text>
+      <text x="320" y="152">y[2]</text>
+      <text x="390" y="152">y[1]</text>
+      <text x="460" y="152">y[0]</text>
+    </g>
+  </g>
+
+  <text x="60" y="200" font-size="14" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">a = 1 时得到 1111；a = 0 时得到 0000。常用于生成全 0 / 全 1 掩码。</text>
+</svg>

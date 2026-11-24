@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="350" viewBox="0 0 720 350">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="720" height="350" fill="#ffffff"/>
+
+  <text x="24" y="34" font-size="18" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">nibble_swap：输入 a 的高 4 位与低 4 位互换后输出 y</text>
+
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="13" fill="#6b7280">
+    <text x="90" y="60">输入 a[7:0]</text>
+    <text x="90" y="222">输出 y[7:0]</text>
+  </g>
+
+  <g font-family="Consolas, Menlo, monospace" text-anchor="middle">
+    <rect x="90"  y="70" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="135" y="70" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="180" y="70" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="225" y="70" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="112" y="104" font-size="20" fill="#1e3a8a">7</text>
+    <text x="157" y="104" font-size="20" fill="#1e3a8a">6</text>
+    <text x="202" y="104" font-size="20" fill="#1e3a8a">5</text>
+    <text x="247" y="104" font-size="20" fill="#1e3a8a">4</text>
+    <text x="180" y="146" font-size="14" fill="#2563eb">a[7:4]</text>
+
+    <rect x="310" y="70" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="355" y="70" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="400" y="70" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="445" y="70" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="332" y="104" font-size="20" fill="#14532d">3</text>
+    <text x="377" y="104" font-size="20" fill="#14532d">2</text>
+    <text x="422" y="104" font-size="20" fill="#14532d">1</text>
+    <text x="467" y="104" font-size="20" fill="#14532d">0</text>
+    <text x="400" y="146" font-size="14" fill="#16a34a">a[3:0]</text>
+
+    <rect x="90"  y="230" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="135" y="230" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="180" y="230" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <rect x="225" y="230" width="45" height="55" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="112" y="264" font-size="20" fill="#1e3a8a">7</text>
+    <text x="157" y="264" font-size="20" fill="#1e3a8a">6</text>
+    <text x="202" y="264" font-size="20" fill="#1e3a8a">5</text>
+    <text x="247" y="264" font-size="20" fill="#1e3a8a">4</text>
+    <text x="180" y="306" font-size="14" fill="#2563eb">y[7:4]</text>
+
+    <rect x="310" y="230" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="355" y="230" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="400" y="230" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <rect x="445" y="230" width="45" height="55" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="332" y="264" font-size="20" fill="#14532d">3</text>
+    <text x="377" y="264" font-size="20" fill="#14532d">2</text>
+    <text x="422" y="264" font-size="20" fill="#14532d">1</text>
+    <text x="467" y="264" font-size="20" fill="#14532d">0</text>
+    <text x="400" y="306" font-size="14" fill="#16a34a">y[3:0]</text>
+  </g>
+
+  <path d="M 400 132 C 400 180, 180 180, 180 226" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 180 132 C 180 180, 400 180, 400 226" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="290" y="176" font-size="13" fill="#374151" font-family="Segoe UI, Microsoft YaHei, sans-serif">分别直连，交叉换位</text>
+
+  <text x="24" y="334" font-size="15" fill="#111827" font-family="Consolas, Menlo, monospace">assign y = { a[3:0], a[7:4] };   // 花括号里，左边放高位</text>
+</svg>

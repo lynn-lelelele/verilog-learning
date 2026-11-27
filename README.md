@@ -1,8 +1,10 @@
 # verilog-zero-to-one
 
-从门电路、组合逻辑到触发器与状态机的 Verilog 中文入门教程。每篇配图、配推导和可运行示例，代码使用 Icarus Verilog 仿真。
+从门电路、组合逻辑、触发器、状态机，到参数化模块、`generate` 和三态门的 Verilog 中文入门教程。每篇配图、配推导和可运行示例，代码使用 Icarus Verilog 仿真。
 
-当前内容：**15 篇图文笔记 + 20 个 Verilog 源文件**。
+当前内容：**18 篇图文笔记 + 26 个 Verilog 源文件**。
+
+本教程的 Verilog 基础主线到阶段 5 结束，不继续扩展到 UART、CPU 等完整项目。
 
 ## 快速开始
 
@@ -27,15 +29,18 @@ vvp demo.vvp
 | 2 | 位宽、取位、拼接、复制、移位 | [05–07 + 番外](notes/05-向量.md) | `vectors/` | 已完成 |
 | 3 | 实例化、端口连接、加法器 | [08–10](notes/08-模块层次.md) | `modules/` | 已完成 |
 | 4 | 组合 `always`、时钟、触发器、状态机 | [11–14](notes/11-always与组合逻辑.md) | `procedural/` `sequential/` `fsm/` | 已完成 |
-| 5 | 三态、`generate`、参数化 | 规划中 | — | 未开始 |
-| 项目 | UART、SPI、简易 CPU | 规划中 | — | 未开始 |
+| 5 | 参数化模块、`generate for`、三态门 | [15–17](notes/15-参数化模块.md) | `advanced/` | 已完成 |
+
+> 基础主线到此结束。后续如果继续做 UART、CPU 或 FPGA 项目，属于新的学习阶段，不计入本教程未完成进度。
 
 ## 目录
 
 ```text
 .
 ├── README.md
-├── notes/                         15 篇 Markdown，配图在 notes/assets/
+├── LICENSE
+├── LICENSE-CC-BY-4.0.md
+├── notes/                         18 篇 Markdown，配图在 notes/assets/
 │   ├── 01-门电路.md
 │   ├── 02-assign语法.md
 │   ├── 03-testbench.md
@@ -50,6 +55,9 @@ vvp demo.vvp
 │   ├── 12-时钟与触发器.md
 │   ├── 13-有限状态机.md
 │   ├── 14-Moore与Mealy.md
+│   ├── 15-参数化模块.md
+│   ├── 16-generate-for.md
+│   ├── 17-三态门与inout.md
 │   ├── 番外-进制转换.md
 │   └── assets/                     SVG 配图与状态机交互演示
 └── 01_basics/
@@ -58,7 +66,8 @@ vvp demo.vvp
     ├── modules/                    半加器、全加器、4 位加法器
     ├── procedural/                 case / if-else：4 选 1 选择器
     ├── sequential/                 同步/异步复位计数器
-    └── fsm/                        Moore / Mealy 1011 序列检测器
+    ├── fsm/                        Moore / Mealy 1011 序列检测器
+    └── advanced/                   参数化、generate、三态门
 ```
 
 ## 笔记索引
@@ -79,18 +88,20 @@ vvp demo.vvp
 | [12](notes/12-时钟与触发器.md) | 时钟沿、`<=`、同步/异步复位、计数器 | `counter4.v` |
 | [13](notes/13-有限状态机.md) | 状态图、三段式、1011 序列检测器 | `01_basics/fsm/` |
 | [14](notes/14-Moore与Mealy.md) | Moore / Mealy、毛刺、寄存输出、互相转换 | `seq_detect1011_mealy.v` |
+| [15](notes/15-参数化模块.md) | `parameter`、常量覆盖、参数化 MUX | `01_basics/advanced/` |
+| [16](notes/16-generate-for.md) | `generate for`、`genvar`、参数化加法器 | `adder_param.v` |
+| [17](notes/17-三态门与inout.md) | 高阻 `z`、`inout`、双向总线 | `bidir_io.v` |
 | [番外](notes/番外-进制转换.md) | 进制与转换、位宽陷阱 | — |
 
-## Roadmap
+## 学习结果
 
-- [x] 阶段 1–4：从门电路到有限状态机
-- [x] 第 13 篇：状态机三段式写法与逐拍分析
-- [x] 第 14 篇：Moore 型与 Mealy 型
-- [ ] 第 15 篇：参数化模块与 `generate`
-- [ ] 自检 testbench：从打印结果升级到自动比对报错
-- [ ] 项目一：UART 收发器（波特率发生器 + 状态机 + 仿真验证）
-- [ ] 项目二：RV32I 单周期 CPU 子集
-- [ ] GTKWave 波形调试教程
+完成本教程后，能读懂并写出：
+
+- 组合逻辑：门电路、MUX、加法器、`always @(*)`
+- 时序逻辑：D触发器、同步/异步复位、计数器
+- 状态机：状态图、三段式、Moore / Mealy
+- 可复用结构：`parameter`、模块实例化、`generate for`
+- 双向接口：`inout`、高阻 `z`、三态总线规则
 
 ## 参与贡献
 

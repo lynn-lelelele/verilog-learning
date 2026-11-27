@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390" viewBox="0 0 720 390">
+  <rect width="720" height="390" fill="#ffffff"/>
+  <text x="20" y="28" font-size="16" font-weight="700" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">三态门：要么驱动总线，要么松开总线</text>
+  <text x="20" y="52" font-size="12" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">1'bz 表示高阻，不是逻辑 0，也不是逻辑 1，而是“这根线暂时不归我驱动”。</text>
+
+  <defs>
+    <marker id="zArrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <circle cx="52" cy="128" r="4" fill="#2563eb"/>
+  <line x1="52" y1="128" x2="668" y2="128" stroke="#334155" stroke-width="3"/>
+  <text x="360" y="118" font-size="12" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">共享总线 io</text>
+
+  <rect x="84" y="86" width="160" height="84" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.7"/>
+  <text x="164" y="113" font-size="13" font-weight="700" fill="#1e3a8a" text-anchor="middle">DUT</text>
+  <text x="164" y="137" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">io = tx_en ? tx_data : z</text>
+  <text x="164" y="157" font-size="11" fill="#6b7280" text-anchor="middle">左侧设备</text>
+
+  <rect x="476" y="86" width="160" height="84" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.7"/>
+  <text x="556" y="113" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">外部设备</text>
+  <text x="556" y="137" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">io = ext_en ? ext_data : z</text>
+  <text x="556" y="157" font-size="11" fill="#6b7280" text-anchor="middle">右侧设备</text>
+
+  <path d="M244 128 L300 128" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#zArrow)"/>
+  <path d="M476 128 L420 128" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#zArrow)"/>
+
+  <rect x="24" y="205" width="156" height="128" rx="9" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="102" y="230" font-size="12" font-weight="700" fill="#065f46" text-anchor="middle">DUT 驱动</text>
+  <text x="102" y="254" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">tx_en = 1</text>
+  <text x="102" y="277" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">ext_en = 0</text>
+  <text x="102" y="307" font-size="12" fill="#059669" text-anchor="middle">io = tx_data</text>
+
+  <rect x="202" y="205" width="156" height="128" rx="9" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="280" y="230" font-size="12" font-weight="700" fill="#1e3a8a" text-anchor="middle">外部设备驱动</text>
+  <text x="280" y="254" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">tx_en = 0</text>
+  <text x="280" y="277" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">ext_en = 1</text>
+  <text x="280" y="307" font-size="12" fill="#2563eb" text-anchor="middle">io = ext_data</text>
+
+  <rect x="380" y="205" width="156" height="128" rx="9" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="458" y="230" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">全部释放</text>
+  <text x="458" y="254" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">tx_en = 0</text>
+  <text x="458" y="277" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">ext_en = 0</text>
+  <text x="458" y="307" font-size="12" fill="#6b7280" text-anchor="middle">io = z</text>
+
+  <rect x="558" y="205" width="138" height="128" rx="9" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="627" y="230" font-size="12" font-weight="700" fill="#991b1b" text-anchor="middle">冲突</text>
+  <text x="627" y="254" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">tx_en = 1</text>
+  <text x="627" y="277" font-size="11" fill="#334155" text-anchor="middle" font-family="Consolas, Menlo, monospace">ext_en = 1</text>
+  <text x="627" y="307" font-size="12" fill="#dc2626" text-anchor="middle">0 / 1 冲突 → x</text>
+
+  <text x="24" y="361" font-size="11" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">规则：同一时刻只能有一个设备驱动总线；其他设备必须输出 z。两个设备同时驱动相反值会产生 x。</text>
+</svg>

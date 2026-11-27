@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390" viewBox="0 0 720 390">
+  <rect width="720" height="390" fill="#ffffff"/>
+  <text x="20" y="28" font-size="16" font-weight="700" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">parameter 在什么时候生效？</text>
+  <text x="20" y="52" font-size="12" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">它在“展开模块”时确定，不是在仿真运行中随信号改变。</text>
+
+  <defs>
+    <marker id="tArrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect x="24" y="92" width="190" height="88" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="119" y="119" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">① 写模块模板</text>
+  <text x="119" y="144" font-size="11" fill="#475569" text-anchor="middle">WIDTH 先写成默认值</text>
+  <text x="119" y="164" font-size="11" fill="#64748b" text-anchor="middle" font-family="Consolas, Menlo, monospace">WIDTH = 8</text>
+
+  <path d="M218 136 L266 136" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#tArrow)"/>
+
+  <rect x="276" y="78" width="205" height="116" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.7"/>
+  <text x="378" y="105" font-size="12" font-weight="700" fill="#312e81" text-anchor="middle">② 例化时覆盖参数</text>
+  <text x="378" y="132" font-size="11" fill="#4338ca" text-anchor="middle" font-family="Consolas, Menlo, monospace">#(.WIDTH(4))</text>
+  <text x="378" y="156" font-size="11" fill="#475569" text-anchor="middle">或省略，使用默认值</text>
+  <text x="378" y="178" font-size="11" fill="#475569" text-anchor="middle">这一步叫 elaboration</text>
+
+  <path d="M485 136 L533 136" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#tArrow)"/>
+
+  <rect x="543" y="92" width="149" height="88" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.7"/>
+  <text x="617" y="119" font-size="12" font-weight="700" fill="#065f46" text-anchor="middle">③ 得到固定硬件</text>
+  <text x="617" y="144" font-size="11" fill="#047857" text-anchor="middle">4 位或 8 位</text>
+  <text x="617" y="164" font-size="11" fill="#64748b" text-anchor="middle">位宽此后不再变</text>
+
+  <rect x="24" y="230" width="210" height="126" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="40" y="256" font-size="13" font-weight="700" fill="#1e3a8a" font-family="Consolas, Menlo, monospace">parameter</text>
+  <text x="40" y="282" font-size="11" fill="#334155">外部可以覆盖</text>
+  <text x="40" y="304" font-size="11" fill="#334155">必须是常量</text>
+  <text x="40" y="326" font-size="11" fill="#334155">适合 WIDTH、DEPTH 等</text>
+
+  <rect x="255" y="230" width="210" height="126" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="271" y="256" font-size="13" font-weight="700" fill="#334155" font-family="Consolas, Menlo, monospace">input</text>
+  <text x="271" y="282" font-size="11" fill="#334155">运行时可以变化</text>
+  <text x="271" y="304" font-size="11" fill="#334155">是真实信号，会画进波形</text>
+  <text x="271" y="326" font-size="11" fill="#334155">不能拿来决定端口位宽</text>
+
+  <rect x="486" y="230" width="206" height="126" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="502" y="256" font-size="13" font-weight="700" fill="#065f46" font-family="Consolas, Menlo, monospace">localparam</text>
+  <text x="502" y="282" font-size="11" fill="#334155">只能在模块内部使用</text>
+  <text x="502" y="304" font-size="11" fill="#334155">外部不能覆盖</text>
+  <text x="502" y="326" font-size="11" fill="#334155">适合内部推导常量</text>
+
+  <text x="24" y="378" font-size="11" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">记法：parameter = 可调常量；input = 运行信号；localparam = 不可调的内部常量。</text>
+</svg>

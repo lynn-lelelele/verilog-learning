@@ -1,75 +1,101 @@
 # verilog-zero-to-one
 
-面向零基础的 Verilog 中文教程。从与门到触发器，每一篇都配图、配真值表推导、配可以直接跑起来的代码。
+从门电路、组合逻辑到触发器与状态机的 Verilog 中文入门教程。每篇配图、配推导和可运行示例，代码使用 Icarus Verilog 仿真。
+
+当前内容：**15 篇图文笔记 + 20 个 Verilog 源文件**。
 
 ## 快速开始
 
-环境：Windows / Linux / macOS 均可，只需 [Icarus Verilog](http://iverilog.icarus.com/)（含 `iverilog` 与 `vvp`），可选 GTKWave 看波形。
+环境：Windows / Linux / macOS，只需 [Icarus Verilog](http://iverilog.icarus.com/)（含 `iverilog` 与 `vvp`），可选 GTKWave 看波形。
 
 ```bash
 git clone https://github.com/lynn-lelelele/verilog-zero-to-one.git
 cd verilog-zero-to-one/01_basics/gates
 
-# 编译 + 仿真，应该看到四行与门真值表
+# 编译并仿真 7 种基本门，应该看到与门真值表
 iverilog -o demo.vvp assign.v or_gate_tb.v
 vvp demo.vvp
 ```
 
-跑通之后，按 `notes/` 的编号顺序读即可，每篇末尾都写了对应的源码位置和运行命令。
+跑通之后，从 `notes/01-门电路.md` 开始按编号阅读。每篇末尾都写了对应源码和运行命令；命令行逐词解释见 [04-命令行](notes/04-命令行.md)。
 
 ## 学习路线
 
 | 阶段 | 内容 | 笔记 | 代码 | 状态 |
 |---|---|---|---|---|
-| 1 | 门电路、assign、testbench、命令行 | 01–04 | `gates/` | 已完成 |
-| 2 | 位宽、取位、拼接、复制、移位 | 05–07 + 番外 | `vectors/` | 已完成 |
-| 3 | 实例化、端口连接、加法器 | 08–10 | `modules/` | 已完成 |
-| 4 | 组合 always、时钟、触发器、状态机 | 11–13 | `procedural/` `sequential/` | 进行中 |
-| 5 | 三态、generate、参数化 | 规划中 | — | 未开始 |
+| 1 | 门电路、`assign`、testbench、命令行 | [01–04](notes/01-门电路.md) | `gates/` | 已完成 |
+| 2 | 位宽、取位、拼接、复制、移位 | [05–07 + 番外](notes/05-向量.md) | `vectors/` | 已完成 |
+| 3 | 实例化、端口连接、加法器 | [08–10](notes/08-模块层次.md) | `modules/` | 已完成 |
+| 4 | 组合 `always`、时钟、触发器、状态机 | [11–14](notes/11-always与组合逻辑.md) | `procedural/` `sequential/` `fsm/` | 已完成 |
+| 5 | 三态、`generate`、参数化 | 规划中 | — | 未开始 |
 | 项目 | UART、SPI、简易 CPU | 规划中 | — | 未开始 |
 
 ## 目录
 
-```
-notes/            13 篇笔记（含进制转换番外），配图在 notes/assets/
-01_basics/
-  gates/          7 种基本门 + 测试台
-  vectors/        向量：高低位交换、复制、移位、位宽规则
-  modules/        半加器、全加器、4 位行波进位加法器
-  procedural/     4 选 1 选择器：case 与 if-else 两种写法
-  sequential/     4 位同步复位计数器
+```text
+.
+├── README.md
+├── notes/                         15 篇 Markdown，配图在 notes/assets/
+│   ├── 01-门电路.md
+│   ├── 02-assign语法.md
+│   ├── 03-testbench.md
+│   ├── 04-命令行.md
+│   ├── 05-向量.md
+│   ├── 06-练习.md
+│   ├── 07-复制与移位.md
+│   ├── 08-模块层次.md
+│   ├── 09-半加器.md
+│   ├── 10-全加器.md
+│   ├── 11-always与组合逻辑.md
+│   ├── 12-时钟与触发器.md
+│   ├── 13-有限状态机.md
+│   ├── 14-Moore与Mealy.md
+│   ├── 番外-进制转换.md
+│   └── assets/                     SVG 配图与状态机交互演示
+└── 01_basics/
+    ├── gates/                      基本门与测试台
+    ├── vectors/                    向量、复制、移位
+    ├── modules/                    半加器、全加器、4 位加法器
+    ├── procedural/                 case / if-else：4 选 1 选择器
+    ├── sequential/                 同步/异步复位计数器
+    └── fsm/                        Moore / Mealy 1011 序列检测器
 ```
 
 ## 笔记索引
 
-| 编号 | 内容 |
-|---|---|
-| 01 | 7 种基本门：真值表、符号、代码 |
-| 02 | `assign` 语法与常见错误 |
-| 03 | testbench 三段结构，以及 reg / wire 怎么选 |
-| 04 | 命令行：cd / iverilog / vvp 三条命令逐词拆解 |
-| 05 | 向量：位宽、常量、取位、拼接 |
-| 06 | 练习清单与验收标准 |
-| 07 | 复制、移位、位宽补零与截断 |
-| 08 | 模块层次：实例化、内部连线、层级树 |
-| 09 | 半加器：从真值表推逻辑式 |
-| 10 | 全加器：逻辑推导与结构分解两条路线 |
-| 11 | `always @(*)`：case / if-else、锁存器陷阱 |
-| 12 | 时钟与触发器：`posedge clk`、`<=`、复位、计数器 |
-| 番外 | 进制与转换、位宽陷阱 |
+| 编号 | 内容 | 源码 / 图 |
+|---|---|---|
+| [01](notes/01-门电路.md) | 7 种基本门：真值表、符号、代码 | `01_basics/gates/` |
+| [02](notes/02-assign语法.md) | `assign` 语法与常见错误 | `01_basics/gates/` |
+| [03](notes/03-testbench.md) | testbench 三段结构，以及 `reg` / `wire` 怎么选 | `or_gate_tb.v` |
+| [04](notes/04-命令行.md) | `cd` / `iverilog` / `vvp` 三条命令逐词拆解 | — |
+| [05](notes/05-向量.md) | 位宽、常量、取位、拼接 | `01_basics/vectors/` |
+| [06](notes/06-练习.md) | 练习清单与验收标准 | — |
+| [07](notes/07-复制与移位.md) | 复制、移位、位宽补零与截断 | `replicate_shift.v` |
+| [08](notes/08-模块层次.md) | 实例化、端口连接、内部连线 | `01_basics/modules/` |
+| [09](notes/09-半加器.md) | 半加器：从真值表推逻辑式 | `half_adder.v` |
+| [10](notes/10-全加器.md) | 全加器：逻辑推导与结构分解 | `full_adder.v` / `adder4.v` |
+| [11](notes/11-always与组合逻辑.md) | `always @(*)`、`case` / `if-else`、锁存器陷阱 | `mux4.v` |
+| [12](notes/12-时钟与触发器.md) | 时钟沿、`<=`、同步/异步复位、计数器 | `counter4.v` |
+| [13](notes/13-有限状态机.md) | 状态图、三段式、1011 序列检测器 | `01_basics/fsm/` |
+| [14](notes/14-Moore与Mealy.md) | Moore / Mealy、毛刺、寄存输出、互相转换 | `seq_detect1011_mealy.v` |
+| [番外](notes/番外-进制转换.md) | 进制与转换、位宽陷阱 | — |
 
 ## Roadmap
 
-- [ ] 第 13 篇：有限状态机（Moore / Mealy、三段式写法）
-- [ ] 第 14 篇：参数化模块与 `generate`
-- [ ] 自检 testbench：从“打印给人看”升级到自动比对报错
-- [ ] 项目一：UART 收发器（含波特率发生器、状态机、仿真验证）
+- [x] 阶段 1–4：从门电路到有限状态机
+- [x] 第 13 篇：状态机三段式写法与逐拍分析
+- [x] 第 14 篇：Moore 型与 Mealy 型
+- [ ] 第 15 篇：参数化模块与 `generate`
+- [ ] 自检 testbench：从打印结果升级到自动比对报错
+- [ ] 项目一：UART 收发器（波特率发生器 + 状态机 + 仿真验证）
 - [ ] 项目二：RV32I 单周期 CPU 子集
-- [ ] 补充 GTKWave 波形调试教程
+- [ ] GTKWave 波形调试教程
 
 ## 参与贡献
 
-欢迎提 Issue：笔记哪里看不懂、哪张图不清楚、哪个例子跑不通，都直接说。
+欢迎提 Issue：笔记哪里看不懂、哪张图不清楚、哪个例子跑不通，都可以直接说。
+
 也欢迎 PR：错别字、更清晰的图、补充练习与答案。新增示例请附 testbench 和实测输出。
 
 ## License

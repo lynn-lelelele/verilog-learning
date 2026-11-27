@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360">
+  <rect width="720" height="360" fill="#ffffff"/>
+  <text x="20" y="28" font-size="16" font-weight="700" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">三段式 FSM：一个时钟周期只做三件事</text>
+  <text x="20" y="52" font-size="12" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">先算“下一站”，再在时钟沿搬进状态，最后根据新状态产生输出。</text>
+
+  <defs>
+    <marker id="flowArrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="82" width="205" height="132" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="38" y="108" font-size="13" font-weight="700" fill="#334155" font-family="Segoe UI, Microsoft YaHei, sans-serif">① 沿前：算次态</text>
+  <text x="38" y="134" font-size="12" fill="#475569" font-family="Segoe UI, Microsoft YaHei, sans-serif">输入：state + din</text>
+  <text x="38" y="157" font-size="12" fill="#475569" font-family="Segoe UI, Microsoft YaHei, sans-serif">动作：case 查转移表</text>
+  <text x="38" y="180" font-size="12" fill="#475569" font-family="Segoe UI, Microsoft YaHei, sans-serif">结果：next_state</text>
+  <text x="38" y="201" font-size="11" fill="#6b7280" font-family="Consolas, Menlo, monospace">always @(*)</text>
+
+  <path d="M229 148 L251 148" stroke="#64748b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <rect x="258" y="82" width="205" height="132" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.7"/>
+  <text x="276" y="108" font-size="13" font-weight="700" fill="#312e81" font-family="Segoe UI, Microsoft YaHei, sans-serif">② 沿上：搬状态</text>
+  <text x="276" y="134" font-size="12" fill="#4338ca" font-family="Segoe UI, Microsoft YaHei, sans-serif">事件：clk 上升沿</text>
+  <text x="276" y="157" font-size="12" fill="#4338ca" font-family="Segoe UI, Microsoft YaHei, sans-serif">动作：写入 next_state</text>
+  <text x="276" y="180" font-size="12" fill="#4338ca" font-family="Segoe UI, Microsoft YaHei, sans-serif">结果：state 更新</text>
+  <text x="276" y="201" font-size="11" fill="#4338ca" font-family="Consolas, Menlo, monospace">state &lt;= next_state</text>
+
+  <path d="M467 148 L489 148" stroke="#64748b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <rect x="496" y="82" width="204" height="132" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.7"/>
+  <text x="514" y="108" font-size="13" font-weight="700" fill="#065f46" font-family="Segoe UI, Microsoft YaHei, sans-serif">③ 沿后：算输出</text>
+  <text x="514" y="134" font-size="12" fill="#047857" font-family="Segoe UI, Microsoft YaHei, sans-serif">输入：新的 state</text>
+  <text x="514" y="157" font-size="12" fill="#047857" font-family="Segoe UI, Microsoft YaHei, sans-serif">动作：判断是否 S4</text>
+  <text x="514" y="180" font-size="12" fill="#047857" font-family="Segoe UI, Microsoft YaHei, sans-serif">结果：detected</text>
+  <text x="514" y="201" font-size="11" fill="#047857" font-family="Consolas, Menlo, monospace">assign detected = ...</text>
+
+  <rect x="20" y="242" width="680" height="72" rx="9" fill="#fffbeb" stroke="#d97706" stroke-width="1.4"/>
+  <text x="38" y="266" font-size="12" font-weight="700" fill="#92400e" font-family="Segoe UI, Microsoft YaHei, sans-serif">拿 S3 + din=1 走一遍：</text>
+  <text x="38" y="291" font-size="12" fill="#92400e" font-family="Segoe UI, Microsoft YaHei, sans-serif">当前 state=S3（101） → 查表 next_state=S4 → 上升沿把 S4 写入 state → detected 变成 1</text>
+  <text x="38" y="307" font-size="11" fill="#a16207" font-family="Consolas, Menlo, monospace">always @(*) 算值，always @(posedge clk) 负责记住；两者不要混。</text>
+
+  <text x="20" y="344" font-size="11" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">可以用一句话记：组合逻辑决定“想去哪”，时钟沿负责“真正走过去”，输出逻辑负责“到了之后报什么”。</text>
+</svg>

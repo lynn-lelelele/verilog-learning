@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>状态机执行可视化 · 1011 检测器</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #f8fafc; color: #1f2937;
+  }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #6b7280; margin-bottom: 20px; }
+
+  .wrap { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+
+  /* 左侧：数据流 */
+  .flow { flex: 1 1 520px; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 18px; }
+  .row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .box {
+    flex: 1; padding: 10px 12px; border-radius: 8px; border: 2px solid #e5e7eb;
+    background: #f9fafb; transition: all .3s; min-height: 74px;
+  }
+  .box .t { font-size: 11px; color: #6b7280; margin-bottom: 6px; }
+  .box .v { font-family: Consolas, Menlo, monospace; font-size: 20px; font-weight: 600; }
+  .box.active { border-color: #2563eb; background: #eff6ff; box-shadow: 0 0 0 3px #dbeafe; }
+  .box .tag { font-size: 10px; color: #9ca3af; }
+  .arrow { font-size: 20px; color: #9ca3af; }
+  .arrow.on { color: #2563eb; }
+
+  .statebox { border-color: #4f46e5; background: #eef2ff; }
+  .statebox .v { color: #312e81; }
+  .nextbox { border-color: #d97706; background: #fffbeb; }
+  .nextbox .v { color: #92400e; }
+  .outbox { border-color: #be185d; background: #fdf2f8; }
+  .outbox .v { color: #9d174d; }
+
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  button {
+    padding: 9px 16px; border-radius: 8px; border: 1px solid #d1d5db;
+    background: #fff; cursor: pointer; font-size: 13px; font-family: inherit;
+  }
+  button:hover:not(:disabled) { border-color: #2563eb; color: #1d4ed8; }
+  button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.primary:hover { background: #1d4ed8; color: #fff; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+
+  .seq { margin-top: 18px; font-family: Consolas, Menlo, monospace; font-size: 13px; color: #374151; line-height: 1.9; word-break: break-all; }
+  .seq .done { color: #9ca3af; }
+  .seq .hit { color: #be185d; font-weight: 700; }
+  .stats { margin-top: 10px; font-size: 13px; color: #6b7280; }
+  .stats b { color: #be185d; }
+
+  /* 右侧：代码 */
+  .code { flex: 1 1 380px; background: #0f172a; border-radius: 10px; padding: 16px; font-family: Consolas, Menlo, monospace; font-size: 12.5px; line-height: 1.75; color: #cbd5e1; overflow: auto; }
+  .code div { white-space: pre; padding: 0 6px; border-radius: 4px; transition: background .25s, color .25s; }
+  .code .hl { background: #1e3a8a; color: #fff; }
+  .code .cm { color: #64748b; }
+  .code .kw { color: #93c5fd; }
+  .code .sep { color: #475569; }
+
+  .note { margin-top: 14px; font-size: 12.5px; color: #6b7280; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<h1>状态机执行可视化：检测 1011</h1>
+<div class="sub">每一步都按代码的顺序走：先算次态（第二段）→ 时钟沿搬进 state（第一段）→ 更新输出（第三段）</div>
+
+<div class="wrap">
+
+  <div class="flow">
+    <div class="row">
+      <div class="box" id="box-din">
+        <div class="t">输入 din</div>
+        <div class="v" id="v-din">—</div>
+        <div class="tag">这一拍要采样的位</div>
+      </div>
+      <div class="arrow" id="a1">→</div>
+      <div class="box nextbox" id="box-next">
+        <div class="t">next_state（第二段算出）</div>
+        <div class="v" id="v-next">—</div>
+        <div class="tag">组合逻辑，随 state + din 变化</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="box statebox" id="box-state">
+        <div class="t">state（第一段保存）</div>
+        <div class="v" id="v-state">S0</div>
+        <div class="tag">只在时钟上升沿改变</div>
+      </div>
+      <div class="arrow" id="a2">→</div>
+      <div class="box outbox" id="box-out">
+        <div class="t">detected（第三段输出）</div>
+        <div class="v" id="v-out">0</div>
+        <div class="tag">Moore：只看 state 是否等于 S4</div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="primary" id="btn-0">送一位 0</button>
+      <button class="primary" id="btn-1">送一位 1</button>
+      <button id="btn-auto">自动跑完整串</button>
+      <button id="btn-reset">重置</button>
+    </div>
+
+    <div class="seq" id="seq"></div>
+    <div class="stats" id="stats">命中次数 <b>0</b>　当前状态 <b>S0</b></div>
+
+    <div class="note">
+      观察点：<br>
+      ① 送一位之后，<b>next_state</b> 立刻变化，但 <b>state 要等时钟沿</b> 才变；<br>
+      ② <b>detected</b> 永远比“命中那一刻”晚一拍，因为它只看 state；<br>
+      ③ 走到 S3 时再送 0，会退回 S2 而不是 S0 —— 这就是“最长后缀”规则。
+    </div>
+  </div>
+
+  <div class="code" id="code">
+    <div id="l1"><span class="cm">// 第二段：算次态（组合逻辑）</span></div>
+    <div id="l2"><span class="kw">always</span> @(*) <span class="kw">begin</span></div>
+    <div id="l3">    next_state = state;</div>
+    <div id="l4">    <span class="kw">case</span> (state)</div>
+    <div id="l5">        S0: next_state = din ? S1 : S0;</div>
+    <div id="l6">        S1: next_state = din ? S1 : S2;</div>
+    <div id="l7">        S2: next_state = din ? S3 : S0;</div>
+    <div id="l8">        S3: next_state = din ? S4 : S2;</div>
+    <div id="l9">        S4: next_state = din ? S1 : S2;</div>
+    <div id="l10">    <span class="kw">endcase</span></div>
+    <div id="l11"><span class="kw">end</span></div>
+    <div class="sep" id="l12"></div>
+    <div id="l13"><span class="cm">// 第一段：时钟沿上搬运</span></div>
+    <div id="l14"><span class="kw">always</span> @(<span class="kw">posedge</span> clk)</div>
+    <div id="l15">    state &lt;= next_state;</div>
+    <div class="sep" id="l16"></div>
+    <div id="l17"><span class="cm">// 第三段：输出（Moore）</span></div>
+    <div id="l18"><span class="kw">assign</span> detected = (state == S4);</div>
+  </div>
+
+</div>
+
+<script>
+  const NAMES = ["S0", "S1", "S2", "S3", "S4"];
+  const DESC  = ["什么都没匹配", "已收到 1", "已收到 10", "已收到 101", "命中 1011"];
+
+  // 次态表：TABLE[当前状态][din]
+  const TABLE = [
+    [0, 1],   // S0: 收 0 留 S0，收 1 去 S1
+    [2, 1],   // S1: 收 0 去 S2，收 1 留 S1
+    [0, 3],   // S2: 收 0 回 S0，收 1 去 S3
+    [2, 4],   // S3: 收 0 退 S2，收 1 去 S4
+    [2, 1]    // S4: 收 0 去 S2，收 1 去 S1
+  ];
+
+  const STREAM = "1011101101011";   // 预设输入流
+
+  let state = 0;
+  let bits = [];        // 已送出的位
+  let hits = 0;
+  let busy = false;
+  let autoTimer = null;
+
+  const $ = id => document.getElementById(id);
+
+  function clearHL() {
+    for (let i = 1; i <= 18; i++) {
+      const el = $("l" + i);
+      if (el) el.classList.remove("hl");
+    }
+    ["box-din","box-next","box-state","box-out"].forEach(id => $(id).classList.remove("active"));
+    ["a1","a2"].forEach(id => $(id).classList.remove("on"));
+  }
+
+  function render() {
+    $("v-state").textContent = NAMES[state];
+    $("v-out").textContent = (state === 4) ? "1" : "0";
+    $("stats").innerHTML = "命中次数 <b>" + hits + "</b>　当前状态 <b>" +
+      NAMES[state] + "</b>（" + DESC[state] + "）";
+    renderSeq();
+  }
+
+  function renderSeq() {
+    if (bits.length === 0) {
+      $("seq").innerHTML = '<span class="done">尚未送入任何位</span>';
+      return;
+    }
+    // 重算每一位对应的状态，便于标出命中位置
+    let st = 0, html = "", hitIdx = [];
+    for (let i = 0; i < bits.length; i++) {
+      st = TABLE[st][bits[i]];
+      if (st === 4) hitIdx.push(i);
+    }
+    for (let i = 0; i < bits.length; i++) {
+      html += hitIdx.includes(i)
+        ? '<span class="hit">' + bits[i] + '</span>'
+        : bits[i];
+    }
+    $("seq").innerHTML = "输入流： " + html +
+      '<br><span class="done">粉色数字 = 这一位让状态进入 S4（命中）</span>';
+  }
+
+  // 走一个完整的时钟周期
+  function step(bit, done) {
+    if (busy) return;
+    busy = true;
+    setButtons(false);
+    clearHL();
+
+    const oldState = state;
+
+    // ---- 第 1 步：第二段算次态 ----
+    $("v-din").textContent = bit;
+    $("box-din").classList.add("active");
+    ["l3","l4","l5","l6","l7","l8","l9","l10"].forEach(id => $(id).classList.add("hl"));
+    $("l" + (5 + oldState)).classList.add("hl");
+
+    const ns = TABLE[oldState][bit];
+    $("v-next").textContent = NAMES[ns];
+    $("box-next").classList.add("active");
+    $("a1").classList.add("on");
+
+    setTimeout(() => {
+      // ---- 第 2 步：时钟沿，第一段搬运 ----
+      clearHL();
+      $("l13").classList.add("hl");
+      $("l14").classList.add("hl");
+      $("l15").classList.add("hl");
+      $("box-state").classList.add("active");
+
+      state = ns;
+      if (state === 4) hits++;
+      bits.push(bit);
+      render();
+
+      setTimeout(() => {
+        // ---- 第 3 步：第三段输出 ----
+        clearHL();
+        $("l17").classList.add("hl");
+        $("l18").classList.add("hl");
+        $("box-out").classList.add("active");
+        $("a2").classList.add("on");
+        $("v-out").textContent = (state === 4) ? "1" : "0";
+
+        setTimeout(() => {
+          clearHL();
+          busy = false;
+          setButtons(true);
+          if (done) done();
+        }, 500);
+      }, 420);
+    }, 480);
+  }
+
+  function setButtons(on) {
+    $("btn-0").disabled = !on;
+    $("btn-1").disabled = !on;
+    $("btn-reset").disabled = !on;
+    $("btn-auto").disabled = !on;
+  }
+
+  function reset() {
+    if (busy) return;
+    state = 0; bits = []; hits = 0;
+    clearHL();
+    $("v-din").textContent = "—";
+    $("v-next").textContent = "—";
+    $("v-out").textContent = "0";
+    $("box-din").classList.remove("active");
+    render();
+  }
+
+  $("btn-0").onclick = () => step(0);
+  $("btn-1").onclick = () => step(1);
+  $("btn-reset").onclick = reset;
+
+  $("btn-auto").onclick = function () {
+    reset();
+    let i = 0;
+    const play = () => {
+      if (i >= STREAM.length) {
+        $("btn-auto").disabled = false;
+        return;
+      }
+      const bit = Number(STREAM[i++]);
+      step(bit, () => setTimeout(play, 260));
+    };
+    setTimeout(play, 120);
+  };
+
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360">
+  <rect width="720" height="360" fill="#ffffff"/>
+  <text x="20" y="26" font-size="15" fill="#1f2937" font-family="Segoe UI, Microsoft YaHei, sans-serif">同一次命中：Mealy 当拍就为 1，Moore 要等到下一个上升沿</text>
+
+  <!-- 周期格线与高亮 -->
+  <g stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="60" y1="62" x2="60" y2="300"/>
+    <line x1="160" y1="62" x2="160" y2="300"/>
+    <line x1="260" y1="62" x2="260" y2="300"/>
+    <line x1="360" y1="62" x2="360" y2="300"/>
+    <line x1="460" y1="62" x2="460" y2="300"/>
+    <line x1="560" y1="62" x2="560" y2="300"/>
+    <line x1="660" y1="62" x2="660" y2="300"/>
+  </g>
+
+  <rect x="260" y="252" width="100" height="44" fill="#ecfdf5"/>
+  <rect x="360" y="182" width="100" height="44" fill="#eff6ff"/>
+
+  <!-- din -->
+  <path d="M 60 150 L 160 150 L 160 120 L 460 120 L 460 150 L 560 150 L 560 120 L 660 120"
+        fill="none" stroke="#d97706" stroke-width="2.2"/>
+  <text x="16" y="146" font-size="12" fill="#374151" font-family="Consolas, Menlo, monospace">din</text>
+
+  <!-- moore -->
+  <path d="M 60 220 L 360 220 L 360 190 L 460 190 L 460 220 L 660 220"
+        fill="none" stroke="#2563eb" stroke-width="2.2"/>
+  <text x="10" y="216" font-size="12" fill="#374151" font-family="Consolas, Menlo, monospace">moore</text>
+
+  <!-- mealy -->
+  <path d="M 60 290 L 260 290 L 260 260 L 360 260 L 360 290 L 660 290"
+        fill="none" stroke="#059669" stroke-width="2.2"/>
+  <text x="10" y="286" font-size="12" fill="#374151" font-family="Consolas, Menlo, monospace">mealy</text>
+
+  <!-- 沿标记 -->
+  <g font-size="11" fill="#dc2626" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="366" y="74">↑ 上升沿</text>
+  </g>
+
+  <text x="452" y="44" font-size="11" fill="#6b7280" font-family="Segoe UI, Microsoft YaHei, sans-serif">一格 = 一个时钟周期，虚线处是上升沿</text>
+
+  <!-- 说明 -->
+  <text x="20" y="322" font-size="11" fill="#065f46" font-family="Segoe UI, Microsoft YaHei, sans-serif">Mealy：din=1 到达的这一拍，状态正好是 S3 → 组合输出立刻为 1（不等时钟）。</text>
+  <text x="20" y="340" font-size="11" fill="#1e3a8a" font-family="Segoe UI, Microsoft YaHei, sans-serif">Moore：这个上升沿把状态推成 S4，下一拍输出才为 1（输出只认状态）。</text>
+</svg>

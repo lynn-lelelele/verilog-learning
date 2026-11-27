@@ -100,4 +100,10 @@ vvp demo.vvp
 
 ## License
 
-待定。
+本仓库采用分许可：
+
+- `01_basics/` 下的 Verilog 源码和 testbench 使用 [MIT License](LICENSE)。
+- `notes/` 下的 Markdown 笔记、SVG/HTML 演示和图片使用 [CC BY 4.0](LICENSE-CC-BY-4.0.md)。
+- 转载或改编笔记与图片时，请注明作者 `lynn-lelelele`，并链接回本仓库。
+
+MIT 和 CC BY 4.0 都允许学习、修改、分发和商业使用；MIT 要求保留许可证声明，CC BY 要求署名。
